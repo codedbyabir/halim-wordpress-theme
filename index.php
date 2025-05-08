@@ -2,61 +2,52 @@
 <!-- Slider Area Start -->
 <section class="slider-area" id="home">
     <div class="slider owl-carousel">
-        <div class="single-slide"
-            style="background-image:url(<?php echo get_template_directory_uri() . '/assets/img/slider/slide-1.jpg' ?>)">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-12">
-                        <div class="slide-table">
-                            <div class="slide-tablecell">
-                                <h4>We Are Advanced Batch 11</h4>
-                                <h2>Digital Agency</h2>
-                                <p>We are a passionate digital design agency that specializes in beautiful and
-                                    easy-to-use digital design & web development services.</p>
-                                <a href="#" class="box-btn">our projects <i class="fa fa-angle-double-right"></i></a>
+
+        <?php
+        $slider_query = new WP_Query(
+            array(
+                'post_type' => 'slider',
+                'posts_per_page' => -1,
+            )
+        );
+
+        if ($slider_query->have_posts()) {
+            while ($slider_query->have_posts()) {
+                $slider_query->the_post();
+                $post_title = get_the_title();
+                $sub_title = get_field('sub_title');
+                $post_content = get_the_content();
+                $button_text = get_field('button_text');
+                $button_url = get_field('button_url');
+                $post_thumbnail = get_the_post_thumbnail_url();
+        ?>
+
+                <div class="single-slide" style="background-image:url(<?php echo $post_thumbnail; ?>)">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="slide-table">
+                                    <div class="slide-tablecell">
+                                        <h4><?php echo $sub_title;  ?></h4>
+                                        <h2><?php echo  $post_title; ?></h2>
+                                        <p><?php echo $post_content; ?></p>
+                                        <a href="<?php echo $button_url; ?>" class="box-btn"><?php echo $button_text; ?> <i
+                                                class="fa fa-angle-double-right"></i></a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="single-slide"
-            style="background-image:url(<?php echo get_template_directory_uri() . '/assets/img/slider/slide-2.jpg' ?>)">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-12">
-                        <div class="slide-table">
-                            <div class="slide-tablecell">
-                                <h4>We Are Halim</h4>
-                                <h2>Modern Agency</h2>
-                                <p>We are a passionate digital design agency that specializes in beautiful and
-                                    easy-to-use digital design & web development services.</p>
-                                <a href="#" class="box-btn">contact us <i class="fa fa-angle-double-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="single-slide"
-            style="background-image:url(<?php echo get_template_directory_uri() . '/assets/img/slider/slide-3.jpg' ?>)">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-12">
-                        <div class="slide-table">
-                            <div class="slide-tablecell">
-                                <h4>
-                                    We Are Halim</h4>
-                                <h2>Creative Agency</h2>
-                                <p>We are a passionate digital design agency that specializes in beautiful and
-                                    easy-to-use digital design & web development services.</p>
-                                <a href="#" class="box-btn">crreative team <i class="fa fa-angle-double-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
+        <?php
+            }
+        }
+
+        ?>
+
+
+
     </div>
 </section>
 <!-- Slider Area Start -->
