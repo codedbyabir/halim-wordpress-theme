@@ -49,3 +49,27 @@ function halim_enqueue_assets()
     wp_enqueue_script('halim-waypoint', get_template_directory_uri() . '/assets/js/waypoint.min.js', ['jquery'], '4.0.1', true);
     wp_enqueue_script('halim-main', get_template_directory_uri() . '/assets/js/main.js', ['jquery'], '1.0.0', true);
 }
+
+
+
+// Slider Post Type
+add_action('init', 'halim_register_slider_post_type');
+function halim_register_slider_post_type()
+{
+    register_post_type('slider', array(
+        'labels' => array(
+            'name' => 'Sliders',
+            'singular_name' => 'Slider',
+            'add_new' => 'Add New',
+            'add_new_item' => 'Add New Slider',
+            'edit_item' => 'Edit Slider',
+            'new_item' => 'New Slider',
+            'view_item' => 'View Slider',
+            'all_items' => 'All Sliders',
+        ),
+        'public' => true,
+        'has_archive' => false,
+        'menu_icon' => 'dashicons-images-alt2',
+        'supports' => array('title', 'editor', 'thumbnail'),
+    ));
+}
